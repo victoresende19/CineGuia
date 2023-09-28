@@ -25,7 +25,7 @@ const App: React.FC = () => {
     }
     setLoading(true);
     setError(null); // Limpa qualquer erro anterior
-    axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict/${selectedOption}`)
+    axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`)
       .then((response) => {
         const { data } = response;
         if (response.status === 200) {
