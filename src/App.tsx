@@ -104,12 +104,14 @@ const App: React.FC = () => {
                 <a
                   className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-left h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
                   href="https//:github.com/victoresende19"
+                  target="_blank"
                 >
                   <BsGithub />
                 </a>
                 <a
                   className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
                   href="https//:www.linkedin.com/in/victor-resende-508b75196/"
+                  target="_blank"
                 >
                   <BsLinkedin />
                 </a>
