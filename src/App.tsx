@@ -18,25 +18,27 @@ const App: React.FC = () => {
     setSelectedOption(event.target.value);
   };
 
-  const handleGenerateRecommendations = () => {
+  const handleGenerateRecommendations = async () => {
     if (!selectedOption) {
       alert('Por favor, selecione um filme antes de gerar recomendações.');
       return;
     }
     setLoading(true);
-    setError(null); // Limpa qualquer erro anterior
-    axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`)
-      .then((response) => {
-        const { data } = response;
-        if (response.status === 200) {
-          setRecommendations(data.movies);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setError('Erro ao procurar, tente novamente'); // Define a mensagem de erro
-      })
-      .finally(() => setLoading(false));
+    setError(null);
+
+    try {
+      let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
+      setRecommendations(res.data.movies); 
+    } catch (error) {
+      try {
+        let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
+        setRecommendations(res.data.movies); 
+      } catch (err) {
+        setError('Erro ao procurar, tente novamente'); 
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchData = () => {
@@ -94,23 +96,22 @@ const App: React.FC = () => {
                   Guia
                 </span>
               </a>
-
               <div className="flex w-1/2 justify-end content-center">
                 <a
-                  className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+                  className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-right h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
                 >
                   Acesse as redes sociais:
                 </a>
                 <a
-                  className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-left h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
-                  href="https//:github.com/victoresende19"
+                  className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-right h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+                  href="https://github.com/victoresende19"
                   target="_blank"
                 >
                   <BsGithub />
                 </a>
                 <a
-                  className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
-                  href="https//:www.linkedin.com/in/victor-resende-508b75196/"
+                  className="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-right h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
+                  href="https://www.linkedin.com/in/victor-resende-508b75196/"
                   target="_blank"
                 >
                   <BsLinkedin />
@@ -118,7 +119,6 @@ const App: React.FC = () => {
               </div>
             </div>
           </div>
-
           <div className="container pt-24 md:pt-36 mx-auto flex flex-wrap flex-col md:flex-row items-center">
             <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
               <h1 className="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
@@ -129,7 +129,6 @@ const App: React.FC = () => {
               <p className="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
                 Sua plataforma para recomendação de filmes!
               </p>
-
               <form className="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                   <label className="block text-blue-300 py-2 font-bold mb-2" htmlFor="emailaddress">
@@ -142,9 +141,10 @@ const App: React.FC = () => {
                       value={selectedOption}
                       onChange={handleChange}
                       size={10}
-                      disabled={isOptionsLoading} // Desabilita o select enquanto os dados estão sendo carregados
+                      disabled={isOptionsLoading}
                     >
-                      {isOptionsLoading ? ( // Renderiza uma mensagem de carregamento enquanto os dados estão sendo buscados
+                      <option value="">Selecione um filme</option>
+                      {isOptionsLoading ? (
                         <option value="">Carregando opções...</option>
                       ) : (
                         optionList.map((movie, index) => (
@@ -159,7 +159,6 @@ const App: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="flex items-center justify-between pt-4">
                   {loading ? (
                     <CircularProgress />
@@ -183,7 +182,7 @@ const App: React.FC = () => {
                 </Box>
               ) : (
                 <>
-                  {error ? ( 
+                  {error ? (
                     <div className="text-center text-red-500 font-bold">
                       <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500 text-3xl">
                         {error}
@@ -194,8 +193,8 @@ const App: React.FC = () => {
                       {recommendation.length > 0 && (
                         <div style={{
                           backgroundImage: 'url("https://images.emojiterra.com/google/noto-emoji/unicode-15/animated/1f37f.gif")',
-                          backgroundSize: 'auto 200px', 
-                          backgroundPosition: '100% 100%',  
+                          backgroundSize: 'auto 200px',
+                          backgroundPosition: '100% 100%',
                           backgroundRepeat: 'no-repeat',
                         }} className="gif-background">
                           <div className="text-center">
