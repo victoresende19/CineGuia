@@ -139,7 +139,7 @@ const App: React.FC = () => {
                     <Select
                       options={optionList.map(movie => ({ value: movie, label: movie }))}
                       value={selectedOption ? { value: selectedOption, label: selectedOption } : { value: '', label: 'Selecione ou digite um filme' }}
-                      onChange={(selectedOption) => setSelectedOption(selectedOption ? selectedOption.value : '')}
+                      onChange={(selectedOption: any) => setSelectedOption(selectedOption ? selectedOption.value : '')}
                       isDisabled={isOptionsLoading}
                       isLoading={isOptionsLoading}
                       placeholder="Selecione um filme"
