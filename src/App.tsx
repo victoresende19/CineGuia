@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Select from 'react-select';
 import './App.css'
 
 const App: React.FC = () => {
@@ -28,13 +29,13 @@ const App: React.FC = () => {
 
     try {
       let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
-      setRecommendations(res.data.movies); 
+      setRecommendations(res.data.movies);
     } catch (error) {
       try {
         let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
-        setRecommendations(res.data.movies); 
+        setRecommendations(res.data.movies);
       } catch (err) {
-        setError('Erro ao procurar, tente novamente'); 
+        setError('Erro ao procurar, tente novamente');
       }
     } finally {
       setLoading(false);
@@ -132,24 +133,20 @@ const App: React.FC = () => {
               <form className="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                   <label className="block text-blue-300 py-2 font-bold mb-2" htmlFor="emailaddress">
-                    Escolha um filme para gerar recomendações parecidas
+                    Escolha um filme para gerar recomendações parecidas. Para pesquisa, utilize o título em inglês
                   </label>
                   <div className="relative">
-                    <div className="main">
-                      <input
-                        list="data"
-                        onChange={(e) => setSelectedOption(e.target.value)}
-                        placeholder="Digite ou procure por um filme"
-                        className="custom-select"
-                      />
-                      <datalist id="data">
-                        {optionList.map((op) => (
-                          <option key={op} value={op}>
-                            {op}
-                          </option>
-                        ))}
-                      </datalist>
-                    </div>
+                    <Select
+                      options={optionList.map(movie => ({ value: movie, label: movie }))}
+                      value={selectedOption ? { value: selectedOption, label: selectedOption } : { value: '', label: 'Selecione ou digite um filme' }}
+                      onChange={(selectedOption) => setSelectedOption(selectedOption ? selectedOption.value : '')}
+                      isDisabled={isOptionsLoading}
+                      isLoading={isOptionsLoading}
+                      placeholder="Selecione um filme"
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12l-4-4h8z" /></svg>
                     </div>
