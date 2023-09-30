@@ -135,25 +135,21 @@ const App: React.FC = () => {
                     Escolha um filme para gerar recomendações parecidas
                   </label>
                   <div className="relative">
-                    <select
-                      className="custom-select"
-                      id="movieSelect"
-                      value={selectedOption}
-                      onChange={handleChange}
-                      size={10}
-                      disabled={isOptionsLoading}
-                    >
-                      <option value="">Selecione um filme</option>
-                      {isOptionsLoading ? (
-                        <option value="">Carregando opções...</option>
-                      ) : (
-                        optionList.map((movie, index) => (
-                          <option key={index} value={movie}>
-                            {movie}
+                    <div className="main">
+                      <input
+                        list="data"
+                        onChange={(e) => setSelectedOption(e.target.value)}
+                        placeholder="Digite ou procure por um filme"
+                        className="custom-select"
+                      />
+                      <datalist id="data">
+                        {optionList.map((op) => (
+                          <option key={op} value={op}>
+                            {op}
                           </option>
-                        ))
-                      )}
-                    </select>
+                        ))}
+                      </datalist>
+                    </div>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                       <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12l-4-4h8z" /></svg>
                     </div>
