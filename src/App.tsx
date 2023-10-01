@@ -190,7 +190,7 @@ const App: React.FC = () => {
                                 Outros filmes parecidos com o escolhido são:
                               </span>
                             </p>
-                            <ul className="mx-auto w-full md:w-2/5 transform transition hover:scale-105 duration-700 ease-in-out hover:rotate-6 text-white text-xl text-left">
+                            <ul className="mx-auto w-full md:w-2/5 text-white text-xl text-left">
                               {recommendation.map((item, index) => (
                                 <li key={index}>{item}</li>
                               ))}
