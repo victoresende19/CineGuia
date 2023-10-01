@@ -11,13 +11,8 @@ const App: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [recommendation, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isOptionsLoading, setIsOptionsLoading] = useState(true); // Novo estado
-  const [error, setError] = useState<string | null>(null); // Novo estado para controlar os erros
-
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
+  const [isOptionsLoading, setIsOptionsLoading] = useState(true); 
+  const [error, setError] = useState<string | null>(null); 
 
   const handleGenerateRecommendations = async () => {
     if (!selectedOption) {
@@ -51,7 +46,7 @@ const App: React.FC = () => {
         }
       })
       .catch((error) => console.log(error))
-      .finally(() => setIsOptionsLoading(false)); // Atualiza o estado quando os dados são carregados
+      .finally(() => setIsOptionsLoading(false)); 
   };
 
   useEffect(() => {
@@ -134,7 +129,7 @@ const App: React.FC = () => {
               <form className="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                   <label className="block text-blue-300 py-2 font-bold mb-2" htmlFor="emailaddress">
-                    Escolha um filme para gerar recomendações parecidas. Para pesquisa, utilize o título em inglês
+                    Escolha um filme para gerar recomendações parecidas. Para a pesquisa, utilize o título em inglês
                   </label>
                   <div className="relative">
                     <Select
@@ -146,7 +141,7 @@ const App: React.FC = () => {
                       maxMenuHeight={170}
                       isClearable={true}
                       isSearchable={true}
-                      placeholder={isOptionsLoading ? "Carregando filmes..." : "Selecione ou digite um filme"} // Define o texto enquanto carrega
+                      placeholder={isOptionsLoading ? "Carregando filmes..." : "Selecione ou digite um filme"}
                     />
                   </div>
                 </div>
