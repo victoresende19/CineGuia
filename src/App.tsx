@@ -139,13 +139,14 @@ const App: React.FC = () => {
                   <div className="relative">
                     <Select
                       options={optionList.map(movie => ({ value: movie, label: movie }))}
-                      value={selectedOption ? { value: selectedOption, label: selectedOption } : { value: '', label: 'Selecione ou digite um filme' }}
+                      value={selectedOption ? { value: selectedOption, label: selectedOption } : null}
                       onChange={(selectedOption: any) => setSelectedOption(selectedOption ? selectedOption.value : '')}
-                      isDisabled={isOptionsLoading}
-                      isLoading={isOptionsLoading}
+                      isDisabled={isOptionsLoading} 
+                      isLoading={isOptionsLoading} 
                       maxMenuHeight={170}
                       isClearable={true}
                       isSearchable={true}
+                      placeholder={isOptionsLoading ? "Carregando filmes..." : "Selecione ou digite um filme"} // Define o texto enquanto carrega
                     />
                   </div>
                 </div>
