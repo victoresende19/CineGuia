@@ -143,14 +143,10 @@ const App: React.FC = () => {
                       onChange={(selectedOption: any) => setSelectedOption(selectedOption ? selectedOption.value : '')}
                       isDisabled={isOptionsLoading}
                       isLoading={isOptionsLoading}
-                      placeholder="Selecione um filme"
+                      maxMenuHeight={170}
                       isClearable={true}
                       isSearchable={true}
                     />
-
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12l-4-4h8z" /></svg>
-                    </div>
                   </div>
                 </div>
                 <div className="flex items-center justify-between pt-4">
