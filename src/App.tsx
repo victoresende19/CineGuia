@@ -120,8 +120,9 @@ const App: React.FC = () => {
               </div>
             </div>
           </div>
+          
           <div className="container pt-24 md:pt-36 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-            <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+            <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start">
               <h1 className="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
                   CineGuia
@@ -168,6 +169,7 @@ const App: React.FC = () => {
                 </div>
               </form>
             </div>
+
             <div className="border-rose-600 w-full xl:w-3/5 p-12 overflow-hidden relative">
               {loading ? (
                 <Box sx={{ display: 'flex' }}>
