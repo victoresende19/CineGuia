@@ -49,6 +49,17 @@ const App: React.FC = () => {
       .finally(() => setIsOptionsLoading(false)); 
   };
 
+  const customStyles = {
+    option: (styles:any, state:any) => ({
+      ...styles,
+      cursor: 'pointer',
+    }),
+    control: (styles:any) => ({
+      ...styles,
+      cursor: 'pointer',
+    })
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -142,6 +153,7 @@ const App: React.FC = () => {
                       isClearable={true}
                       isSearchable={true}
                       placeholder={isOptionsLoading ? "Carregando filmes..." : "Selecione ou digite um filme"}
+                      styles={customStyles}
                     />
                   </div>
                 </div>
