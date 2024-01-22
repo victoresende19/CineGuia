@@ -23,11 +23,13 @@ const App: React.FC = () => {
     setError(null);
 
     try {
-      let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
+      // let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
+      let res = await axios.get(`https://cine-guia-api.onrender.com/movie_predict_grouped/${selectedOption}`);
       setRecommendations(res.data.movies);
     } catch (error) {
       try {
-        let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
+        // let res = await axios.get(`https://cineguia-400223.uk.r.appspot.com/movie_predict_grouped/${selectedOption}`);
+        let res = await axios.get(`https://cine-guia-api.onrender.com/movie_predict_grouped/${selectedOption}`);
         setRecommendations(res.data.movies);
       } catch (err) {
         setError('Erro ao procurar, tente novamente');
@@ -38,7 +40,8 @@ const App: React.FC = () => {
   };
 
   const fetchData = () => {
-    axios.get('https://cineguia-400223.uk.r.appspot.com/movies_list/')
+    // axios.get('https://cineguia-400223.uk.r.appspot.com/movies_list/')
+    axios.get('https://cine-guia-api.onrender.com/movies_list/')
       .then((response) => {
         const { data } = response;
         if (response.status === 200) {
